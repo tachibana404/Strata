@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSS Feed Reader</title>
+</head>
+<body>
+  <div id="rss-feed"></div>
+
+  <script>
+    // XMLHttpRequestを使用してRSSフィードを取得する関数
+    function getRssFeed(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          callback(xhr.responseXML);
+        }
+      };
+      xhr.open("GET", url, true);
+      xhr.send();
+    }
+
+    // RSSフィードを解析してHTMLに表示する関数
+    function displayRssFeed(xml) {
+      var items = xml.querySelectorAll("item");
+      var output = "<ul>";
+      for (var i = 0; i < items.length; i++) {
+        var title = items[i].querySelector("title").textContent;
+        var link = items[i].querySelector("link").textContent;
+        output += "<li><a href='" + link + "'>" + title + "</a></li>";
+      }
+      output += "</ul>";
+      document.getElementById("rss-feed").innerHTML = output;
+    }
+
+    // RSSフィードのURL
+    var rssFeedUrl = "https://milk.choco.ink/@tachibana.rss";
+
+    // 関数を呼び出してRSSフィードを取得し、表示する
+    getRssFeed(rssFeedUrl, displayRssFeed);
+  </script>
+</body>
+</html>
