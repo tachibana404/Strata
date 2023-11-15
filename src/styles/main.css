@@ -3219,3 +3219,9 @@ input, select, textarea {
 			}
 
 	}
+
+/* レスポンシブ対応する例 */
+#iframe-rss {
+　max-width: 100%;
+　height: auto;
+}
