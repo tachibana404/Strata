@@ -3224,7 +3224,7 @@ input, select, textarea {
 
 .iframe-wrapper {
   position: relative;
-
+  padding-bottom: 36.25%;
   height: 0;
   overflow: hidden;
 }
